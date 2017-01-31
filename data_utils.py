@@ -2,7 +2,7 @@ import numpy as np
 
 def char_counter(n, m=9):
     # Generate lines of the form "cccc4" "cccccc6" etc.
-    f = open("char_count_input" + str(m) + ".txt", 'w')
+    f = open("data/char_count_input" + str(m) + ".txt", 'w')
     for i in range(n):
         k = np.random.randint(1, m+1)
         for j in range(k):
@@ -18,7 +18,7 @@ def to_digit(m):
 
 def char_printer(n, m=9):
     # Generate lines of the form "5ccccc" "3ccc" etc.
-    f = open("char_printer_input" + str(m) + ".txt", 'w')
+    f = open("data/char_printer_input" + str(m) + ".txt", 'w')
     for i in range(n):
         k = np.random.randint(1, m+1)
         f.write(to_digit(k))
