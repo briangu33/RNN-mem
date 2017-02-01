@@ -29,6 +29,8 @@ def char_printer(n, m=9):
 char_printer(100000)
 
 def correct_print_line(line):
+    if len(line) == 0:
+        return False
     k = 0
     if ord(line[0]) < 60:
         k = int(line[0])
@@ -50,6 +52,8 @@ def acc_print(sample):
     return correct / total
 
 def correct_count_line(line):
+    if len(line) == 0:
+        return False
     k = 0
     if ord(line[len(line) - 1]) < 60:
         k = int(line[len(line) - 1])

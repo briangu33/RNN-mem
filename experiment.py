@@ -8,7 +8,7 @@ def char_print_experiment():
 	char_printer(100000)
 
 	rnn = Simple_RNN(2, 12)
-	rnn.train("data/char_printer_input9.txt", 40001)
+	rnn.train("data/char_printer_input9.txt", 100001)
 
 	sample, hs = rnn.sample(n=10000)
 	print acc_print(sample)
