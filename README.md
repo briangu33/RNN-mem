@@ -30,7 +30,7 @@ With 10 neurons, the RNN learns to fill and clear boards perfectly. Below is a s
 
 <img src="/img/fillboard_act10.png" alt="fill-grid with 9 cells" width="600px">
 
-Interestingly, note that neurons usually correspond directly to cell squares, acting as bits: for example, neuron 2 activates when cell 6 is filled, neuron 4 activates when cell 2 is filled, etc. Neuron 9 appears to track the overall progress of board filling, remembering whether or not the board is to be cleared. The correspondance is almost 1-to-1!
+Interestingly, neurons often learn to correspond directly to cell squares, acting as bits: for example, neuron 2 activates when cell 6 is filled, neuron 4 activates when cell 2 is filled, etc. Neuron 9 appears to track the overall progress of board filling, remembering whether or not the board is to be cleared. The correspondance is almost 1-to-1!
 
 Another interesting observation is that 10 neurons appears to be close to the minimum number of neurons needed to fully retain the board state. This makes sense, since each neuron generally learns to track an individual cell. In the figures below, we compare the performance of a trained 5-neuron RNN, a trained 10-neuron RNN, and an "optimal" 10-neuron RNN. 
 
@@ -38,7 +38,7 @@ To assess at the performance of the RNNs, we observe the Softmax output probabil
 
 <img src="/img/5neurprobs.png" alt="learned, 5 neuron RNN" width="270px"> <img src="/img/10neurprobs.png" alt="learned, 10 neuron RNN" width="280px"> <img src="/img/opt.png" alt="optimal, 10 neuron RNN" width="270px">
 
-It is clear that the 10-neuron RNN vastly outperforms the 5-neuron RNN, doing a much better job of staying above the jagged line. Looking closer at the operation of the 5-neuron RNN, we found that the RNN was doing the best it could to take "shortcuts" in remembering the board--often using single neurons to remember whether or not multiple cells were filled.
+It is clear that the 10-neuron RNN vastly outperforms the 5-neuron RNN, doing a much better job of staying above the jagged line. Looking closer at the weight matrices of the 5-neuron RNN, we found that the RNN was doing the best it could to take "shortcuts" in remembering the board--often using single neurons to remember whether or not multiple cells were filled.
 
 Unfortunately, these nice correspondances don't always extend cleanly to larger grids. We experimented with grids of size 11 or more, and found that neurons often fail to specialize as perfectly as they did for grids up to size 9. Some neurons begin tracking multiple cells; others have no discernable meaning. This may also be a result of an insufficient training program. Despite this, the results for the 9-cell grid fill task are once again surprisingly understandable. 
 
@@ -50,7 +50,7 @@ In the slightly more complex 3-in-a-row task, we added the condition that the RN
 
 <img src="/img/bottomrow.png" alt="bottom row filled first" width="600px">
 
-Neurons 3 and 18 appear to have no easily-understandable function. Neuron 4 appears to track the fourth position on the board. However, neuron 9 appears to track something more interesting--whether or not the top row of the grid is filled. On boards where the 0-1-2 row is filled first, neuron 9 activates a turn *early* (see upper figure)). Additionally, we know that neuron 9 is specifically tracking this row because of its behavior in cases where the board is cleared due to rows other than the top row being filled. For example, the lower figure shows that neuron 9 does not delay this early-activation behavior in sequences of moves where the 6-7-8 row is the first row to be filled.
+Neurons 3 and 18 appear to have no easily-understandable function. Neuron 4 appears to track the fourth position on the board. However, neuron 9 appears to track something more interesting--whether or not the top row of the grid is filled. On boards where the 0-1-2 row is filled first, neuron 9 activates a turn *early* (see upper figure)). Additionally, we know that neuron 9 is specifically tracking this row because of its behavior in cases where the top row is not filled to completion. For example, the lower figure shows that neuron 9 does not display this early-activation behavior in sequences of moves where the 6-7-8 row is the first row to be filled.
 
 ## Simple Grammars
 
